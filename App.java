@@ -1,5 +1,6 @@
 public class App{
     public static void main(String[] args) {
-        System.out.println("oi");
+        MenuPrincipal gui = new MenuPrincipal(700, 280);
+        gui.show();
     }
 }

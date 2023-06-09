@@ -19,21 +19,24 @@ public class MenuPrincipal extends Gui {
         JButton add = new Button("images/add.png", 50, 50, 70, 70, "").getButton();
 
         JPanel panel = new JPanel();
+        JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel settingsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        JLabel label = new JLabel("Escolha uma ação:");
+
+        labelPanel.add(label);
 
         panel.add(calendar);
-        panel.add(seeRegister);
-        
-        panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        
-        this.jframe.add(panel, BorderLayout.NORTH);
-        
-        JPanel settingsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        
+        panel.add(seeRegister);  
+        labelPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+    
         settingsPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         settingsPanel.add(add);
         settingsPanel.add(trash);
         settingsPanel.add(settings);
-
+        
+        this.jframe.add(labelPanel, BorderLayout.NORTH);
+        this.jframe.add(panel, BorderLayout.CENTER);
         this.jframe.add(settingsPanel, BorderLayout.SOUTH);
 
         setJFrame(this.jframe);

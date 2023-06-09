@@ -1,6 +1,6 @@
 public class App{
     public static void main(String[] args) {
-        Add gui = new Add(700, 350);
+        MenuPrincipal gui = new MenuPrincipal(700, 280);
         gui.show();
     }
 }

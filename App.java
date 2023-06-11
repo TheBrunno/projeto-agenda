@@ -1,6 +1,6 @@
 public class App{
     public static void main(String[] args) {
-        MenuPrincipal gui = new MenuPrincipal(700, 280);
+        Calendar gui = new Calendar(765, 800);
         gui.show();
     }
 }

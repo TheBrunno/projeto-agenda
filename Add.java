@@ -3,7 +3,7 @@ import javax.swing.border.*;
 import java.awt.*;
 
 public class Add extends Gui{
-        private JFrame jframe;
+    private JFrame jframe;
 
     public Add(int width, int height){
         super("Adicionar", width, height);

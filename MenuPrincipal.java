@@ -47,4 +47,13 @@ public class MenuPrincipal extends Gui {
         trash.addActionListener(e -> JOptionPane.showMessageDialog(this.jframe, "Botão 3 pressionado!"));
         settings.addActionListener(e -> JOptionPane.showMessageDialog(this.jframe, "Botão 5 pressionado!"));
     }
+
+    // getters and setters
+    public JFrame getJframe() {
+        return jframe;
+    }
+
+    public void setJframe(JFrame jframe) {
+        this.jframe = jframe;
+    }
 }

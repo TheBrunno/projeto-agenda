@@ -8,9 +8,9 @@ import java.util.Arrays;
 public class Calendar extends Gui{
     private JFrame jframe;
     private int width;
+    private int height;
     private DayOfWeek initialWeekDayOnMonth;
     private LocalDate currentDate;
-
 
     public Calendar(int width, int height){
         super("Calendário", width, height);
@@ -56,6 +56,7 @@ public class Calendar extends Gui{
 
         return panel;
     }
+    
     public int getNumberDays(){
         int feb = 0;
         currentDate = LocalDate.now();
@@ -112,5 +113,46 @@ public class Calendar extends Gui{
 
     public JPanel createDayOnFrame(JPanel panel){
         return createDayOnFrame(0, panel);
+    }
+    
+    // getters and setters
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setJframe(JFrame jframe) {
+        this.jframe = jframe;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setInitialWeekDayOnMonth(DayOfWeek initialWeekDayOnMonth) {
+        this.initialWeekDayOnMonth = initialWeekDayOnMonth;
+    }
+
+    public void setCurrentDate(LocalDate currentDate) {
+        this.currentDate = currentDate;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public JFrame getJframe() {
+        return jframe;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public DayOfWeek getInitialWeekDayOnMonth() {
+        return initialWeekDayOnMonth;
+    }
+
+    public LocalDate getCurrentDate() {
+        return currentDate;
     }
 }

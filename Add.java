@@ -48,4 +48,12 @@ public class Add extends Gui{
         setJFrame(this.jframe);
 
     }
+
+    public JFrame getJframe() {
+        return jframe;
+    }
+
+    public void setJframe(JFrame jframe) {
+        this.jframe = jframe;
+    }
 }

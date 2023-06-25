@@ -21,14 +21,14 @@ public class Gui {
         if(object.isCompletado()){
             Object[] options = {"Voltar"};
             completado = "Sim";
-            String desc = "Nome da tarefa: "+object.getNome()+"\nData de criação: "+object.getData()+"\nData de término: "+object.getDataLimite()+"\nDescrição: "+object.getDesc()+"\nFeito: "+completado; 
+            String desc = "Nome da tarefa: "+object.getNome()+"\nData de início: "+object.getData()+"\nData de término: "+object.getDataLimite()+"\nDescrição: "+object.getDesc()+"\nFeito: "+completado; 
             int option = JOptionPane.showOptionDialog(null, desc, object.getNome(), JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
             if(option == -1) return null;
             else return options[option]+"";
         }else{
             Object[] options = {"Concluir", "Voltar"};
             completado = "Não";
-            String desc = "Nome da tarefa: "+object.getNome()+"\nData de criação: "+object.getData()+"\nData de término: "+object.getDataLimite()+"\nDescrição: "+object.getDesc()+"\nFeito: "+completado; 
+            String desc = "Nome da tarefa: "+object.getNome()+"\nData de início: "+object.getData()+"\nData de término: "+object.getDataLimite()+"\nDescrição: "+object.getDesc()+"\nFeito: "+completado; 
             int option = JOptionPane.showOptionDialog(null, desc, object.getNome(), JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[1]);
             if(option == -1) return "";
             else return options[option]+"";

@@ -96,7 +96,7 @@ public class Tarefa extends Registro{
             if(tarefasT[i].isCompletado() == true){
                tarefasS[i] = tarefasT[i].getNome()+" (\u2713)"; 
             } else{
-                tarefasS[i] = tarefasT[i].getNome();
+                tarefasS[i] = tarefasT[i].getNome()+" ("+tarefasT[i].getDataLimite()+")";
             }
             
         }

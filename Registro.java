@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public abstract class Registro {
     private String nome;
     private String data;
@@ -8,6 +10,27 @@ public abstract class Registro {
     abstract public void editar(int index);
     abstract public void excluir(int index);
     abstract public String[] exibir();
+    
+    public boolean verifyDate(String dataInput){
+        LocalDateTime now = LocalDateTime.now();
+        Gui gui = new Gui();
+        try{
+            String dataString[] = new String[3];
+            dataString = dataInput.split("/");
+            int[] data = new int[3];
+            for(int j=0; j<3; j++){
+                data[j] = Integer.valueOf(dataString[j]); 
+            }
+            if(data[2]<now.getYear() || data[1]<now.getMonthValue() && data[2]==now.getYear() || data[0]<now.getDayOfMonth() && data[1]==now.getMonthValue() && data[2]==now.getYear()){
+                gui.errorMessage("Você não pode criar eventos com data anterior da atual!", "Data Incorreta");
+                return false;
+            }
+        } catch(Exception NumberFormatException){
+            gui.errorMessage("Input incorreto! \nFormato de data correto: DD/MM/YYYY", "Input incorreto!");
+            return false;
+        }
+        return true;
+    }
     
     public String getNome() {
         return nome;

@@ -61,4 +61,8 @@ public class Gui {
         if(option == -1) return "";
         else return options[option]+"";
     }
+
+    public void errorMessage(String desc, String title){
+        JOptionPane.showMessageDialog(null, desc, title, 0, null);
+    }
 }

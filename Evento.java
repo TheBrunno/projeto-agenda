@@ -77,7 +77,7 @@ public class Evento extends Registro {
         Evento[] eventoE = armazena.getAllEventos();
         String[] eventoS = new String[eventoE.length];
         for(int i=0; i<eventoE.length; i++){
-            eventoS[i] = eventoE[i].getNome();
+            eventoS[i] = eventoE[i].getData() +" - "+ eventoE[i].getNome();
         }
         return eventoS;
     }

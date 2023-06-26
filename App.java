@@ -97,33 +97,33 @@ public class App{
                 if(funk.equals("Criar")){
                     evento.criar();
                 }else if(funk.equals("Listar")){
-                    String[] tarefas = evento.exibir();
-                    String value = gui.painel(tarefas, "Escolha um evento para ser VISUALIZADO");
+                    String[] eventos = evento.exibir();
+                    String value = gui.painel(eventos, "Escolha um evento para ser VISUALIZADO");
                     
-                    int index = Arrays.asList(tarefas).indexOf(value);
+                    int index = Arrays.asList(eventos).indexOf(value);
 
                     if(index != -1){
                         Evento escolhida = evento.exibir(index);
                         gui.output(escolhida);
                     }
                 }else if(funk.equals("Excluir")){
-                    String[] tarefas = evento.exibir();
-                    String value = gui.painel(tarefas, "Escolha um evento para ser EXCLUÍDO");
+                    String[] eventos = evento.exibir();
+                    String value = gui.painel(eventos, "Escolha um evento para ser EXCLUÍDO");
                     
-                    int index = Arrays.asList(tarefas).indexOf(value);
+                    int index = Arrays.asList(eventos).indexOf(value);
 
                     if(index != -1){
                         Object[] deleteOptions = {"Excluir", "Voltar"};
-                        String resultadoDelete = gui.messageDelete("essa nota?", deleteOptions, 0);
+                        String resultadoDelete = gui.messageDelete("esse evento?", deleteOptions, 0);
                         if(resultadoDelete.equals("Excluir")){
                             evento.excluir(index);
                         }
                     }
                 }else if(funk.equals("Editar")){
-                    String[] tarefas = evento.exibir();
-                    String value = gui.painel(tarefas, "Escolha um evento para ser EDITADO");
+                    String[] eventos = evento.exibir();
+                    String value = gui.painel(eventos, "Escolha um evento para ser EDITADO");
                     
-                    int index = Arrays.asList(tarefas).indexOf(value);
+                    int index = Arrays.asList(eventos).indexOf(value);
 
                     if(index != -1){
                         evento.editar(index);
@@ -137,7 +137,7 @@ public class App{
                     prov.criar();
                 }else if(prof.equals("Listar")){
                     String[] tarefas = prov.exibir();
-                    String value = gui.painel(tarefas, "Escolha uma tarefa para ser VISUALIZADA");
+                    String value = gui.painel(tarefas, "Escolha uma prova para ser VISUALIZADA");
                     
                     int index = Arrays.asList(tarefas).indexOf(value);
 
@@ -150,23 +150,23 @@ public class App{
                         }
                     }
                 }else if(prof.equals("Excluir")){
-                    String[] tarefas = prov.exibir();
-                    String value = gui.painel(tarefas, "Escolha uma tarefa para ser EXCLUÍDA");
+                    String[] provas = prov.exibir();
+                    String value = gui.painel(provas, "Escolha uma prova para ser EXCLUÍDA");
                     
-                    int index = Arrays.asList(tarefas).indexOf(value);
+                    int index = Arrays.asList(provas).indexOf(value);
 
                     if(index != -1){
                         Object[] deleteOptions = {"Excluir", "Voltar"};
-                        String resultadoDelete = gui.messageDelete("essa tarefa?", deleteOptions, 0);
+                        String resultadoDelete = gui.messageDelete("essa prova?", deleteOptions, 0);
                         if(resultadoDelete.equals("Excluir")){
                             prov.excluir(index);
                         }
                     }
                 }else if(prof.equals("Editar")){
-                    String[] tarefas = prov.exibir();
-                    String value = gui.painel(tarefas, "Escolha uma tarefa para ser EDITADA");
+                    String[] prova = prov.exibir();
+                    String value = gui.painel(prova, "Escolha uma prova para ser EDITADA");
                     
-                    int index = Arrays.asList(tarefas).indexOf(value);
+                    int index = Arrays.asList(prova).indexOf(value);
 
                     if(index != -1){
                         prov.editar(index);

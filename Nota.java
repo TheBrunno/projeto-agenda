@@ -78,7 +78,7 @@ public class Nota extends Registro {
         Nota[] notasN = armazena.getAllNotas();
         String[] notasS = new String[notasN.length];
         for(int i=0; i<notasN.length; i++){
-            notasS[i] = notasN[i].getNome();
+            notasS[i] = notasN[i].getData() + " - " + notasN[i].getNome();
         }
         return notasS;
     }

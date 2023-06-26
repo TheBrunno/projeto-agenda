@@ -11,16 +11,26 @@ public class Tarefa extends Registro{
     }
 
     public void criar(){
+        LocalDateTime now = LocalDateTime.now();
         Gui gui = new Gui();
-        String[] labels = {"Insira o nome", "Insira a data", "Insira a data do término", "Insira a descrição"};
+        String[] labels = {"Insira o nome", "Insira a data (deixe vazio para a data atual)", "Insira a data do término (deixe vazio para a data atual)", "Insira a descrição"};
 
-        int[] dataUni = new int[3];
+        int dataUni[] = new int[3];
         for(int i=0; i<labels.length; i++){
             Object res = gui.input(labels[i]);
             if(res == null) return;
             if(i==0) setNome(""+res);
             if(i==1){
-                if (!verifyDate(""+res)){
+                String resS = res+"";
+                if(resS.isEmpty()){
+                    String dia = now.getDayOfMonth()+"";
+                    String mes = now.getMonthValue()+"";
+                    String ano = now.getYear()+"";
+
+                    if(Integer.parseInt(dia) < 10) dia = "0"+dia;
+                    if(Integer.parseInt(mes) < 10) mes = "0"+mes; 
+                    res = dia+"/"+mes+"/"+ano;
+                }if (!verifyDate(""+res)){
                     i=0;
                     continue;
                 }
@@ -34,7 +44,16 @@ public class Tarefa extends Registro{
                 setData(""+res);
             }
             if(i==2){
-                if (!verificarDataLimite(""+res, dataUni)){
+                String resS = res+"";
+                if(resS.isEmpty()){
+                    String dia = now.getDayOfMonth()+"";
+                    String mes = now.getMonthValue()+"";
+                    String ano = now.getYear()+"";
+
+                    if(Integer.parseInt(dia) < 10) dia = "0"+dia;
+                    if(Integer.parseInt(mes) < 10) mes = "0"+mes; 
+                    res = dia+"/"+mes+"/"+ano;
+                }if (!verificarDataLimite(""+res, dataUni)){
                     i=1;
                     continue;
                 }
@@ -46,8 +65,9 @@ public class Tarefa extends Registro{
         armazena.armazenar(this);
     }
     public void editar(int index){
+        LocalDateTime now = LocalDateTime.now();
         Gui gui = new Gui();
-        String[] labels = {"Insira o nome (pressione enter para não editar)", "Insira a data (pressione enter para não editar)", "Insira a data do término (pressione enter para não editar)", "Insira a descrição (pressione enter para não editar)"};
+        String[] labels = {"Insira o nome (pressione enter para não editar)", "Insira a data (deixe vazio para a data atual)", "Insira a data do término (pressione enter para não editar)", "Insira a descrição (pressione enter para não editar)"};
 
         Tarefa taf = armazena.getOneTarefa(index);
         int dataUni[] = new int[3];
@@ -57,8 +77,17 @@ public class Tarefa extends Registro{
         setNome(""+res);
         while(true){
             res = gui.input(labels[1], taf.getData());
+            String resS = res+"";
             if(res == null) return;
-            if (!verifyDate(""+res)){
+            if(resS.isEmpty()){
+                String dia = now.getDayOfMonth()+"";
+                String mes = now.getMonthValue()+"";
+                String ano = now.getYear()+"";
+
+                if(Integer.parseInt(dia) < 10) dia = "0"+dia;
+                if(Integer.parseInt(mes) < 10) mes = "0"+mes; 
+                res = dia+"/"+mes+"/"+ano;
+            }if (!verifyDate(""+res)){
                 continue;
             }
 
@@ -74,8 +103,17 @@ public class Tarefa extends Registro{
         }
         while(true){
             res = gui.input(labels[2], taf.getDataLimite());
+            String resS = res+"";
             if(res == null) return;
-            if (!verificarDataLimite(""+res, dataUni)){
+            if(resS.isEmpty()){
+                String dia = now.getDayOfMonth()+"";
+                String mes = now.getMonthValue()+"";
+                String ano = now.getYear()+"";
+
+                if(Integer.parseInt(dia) < 10) dia = "0"+dia;
+                if(Integer.parseInt(mes) < 10) mes = "0"+mes; 
+                res = dia+"/"+mes+"/"+ano;
+            }if (!verificarDataLimite(""+res, dataUni)){
                 continue;
             }
             setDataLimite(""+res);
@@ -112,7 +150,7 @@ public class Tarefa extends Registro{
         armazena.atualizar(index, tafConcluida);
     }
 
-    public boolean verificarDataLimite(String dataInput, int[] dataUni){
+    public boolean verificarDataLimite(String dataInput, int dataUni[]){
         LocalDateTime now = LocalDateTime.now();
         Gui gui = new Gui();
         try{
@@ -120,7 +158,7 @@ public class Tarefa extends Registro{
             dataString = dataInput.split("/");
             int[] data = new int[3];
             for(int j=0; j<3; j++){
-                data[j] = Integer.valueOf(dataString[j]);
+                data[j] = Integer.parseInt(dataString[j]);
             }
             if(data[2]<now.getYear() || data[1]<now.getMonthValue() && data[2]==now.getYear() || data[0]<now.getDayOfMonth() && data[1]==now.getMonthValue() && data[2]==now.getYear()){
                 gui.errorMessage("A data de término não pode ser antes da atual!", "Data Incorreta");

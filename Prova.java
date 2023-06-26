@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public class Prova extends Registro{
     private String nota = "";
     private Armazena armazena;
@@ -9,14 +11,24 @@ public class Prova extends Registro{
 
     public void criar(){
         Gui gui = new Gui();
-        String[] labels = {"Insira a materia", "Insira a data", "Insira a descrição"};
+        LocalDateTime now = LocalDateTime.now();
+        String[] labels = {"Insira a materia", "Insira a data (deixe vazio para a data atual)", "Insira a descrição"};
 
         for(int i=0; i<labels.length; i++){
             Object res = gui.input(labels[i]);
             if(res == null) return;
             if(i==0) setNome(""+res);
             if(i==1){
-                if (!verifyDate(""+res)){
+                String resS = res+"";
+                if(resS.isEmpty()){
+                    String dia = now.getDayOfMonth()+"";
+                    String mes = now.getMonthValue()+"";
+                    String ano = now.getYear()+"";
+
+                    if(Integer.parseInt(dia) < 10) dia = "0"+dia;
+                    if(Integer.parseInt(mes) < 10) mes = "0"+mes; 
+                    res = dia+"/"+mes+"/"+ano;
+                }if (!verifyDate(""+res)){
                     i=0;
                     continue;
                 }
@@ -29,7 +41,8 @@ public class Prova extends Registro{
     }
     public void editar(int index){
         Gui gui = new Gui();
-        String[] labels = {"Insira a materia (pressione enter para não editar)", "Insira a data (pressione enter para não editar)", "Insira a descrição (pressione enter para não editar)"};
+        LocalDateTime now = LocalDateTime.now();
+        String[] labels = {"Insira a matéria (pressione enter para não editar)", "Insira a data (deixe vazio para a data atual)", "Insira a descrição (pressione enter para não editar)"};
 
         Prova pro = armazena.getOneProva(index);
 
@@ -39,7 +52,16 @@ public class Prova extends Registro{
         while(true){
             res = gui.input(labels[1], pro.getData());
             if(res == null) return;
-            if (!verifyDate(""+res)){
+            String resS = res+"";
+            if(resS.isEmpty()){
+                String dia = now.getDayOfMonth()+"";
+                String mes = now.getMonthValue()+"";
+                String ano = now.getYear()+"";
+
+                if(Integer.parseInt(dia) < 10) dia = "0"+dia;
+                if(Integer.parseInt(mes) < 10) mes = "0"+mes; 
+                res = dia+"/"+mes+"/"+ano;
+            }if (!verifyDate(""+res)){
                 continue;
             }
             setData(""+res);
@@ -57,7 +79,9 @@ public class Prova extends Registro{
         Prova[] provaP = armazena.getAllProvas();
         String[] provaS = new String[provaP.length];
         for(int i=0; i<provaP.length; i++){
-            provaS[i] = provaP[i].getNome();
+            if(provaP[i].getNota().isEmpty()) provaS[i] = provaP[i].getNome() + " ("+provaP[i].getData()+")";
+            else provaS[i] = provaP[i].getNome() + " ("+provaP[i].getNota()+")";
+            
         }
         return provaS;
     }

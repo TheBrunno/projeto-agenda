@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public class Evento extends Registro {
     private Armazena armazena;
 
@@ -7,16 +9,25 @@ public class Evento extends Registro {
     }
 
     public void criar(){
-        
+        LocalDateTime now = LocalDateTime.now();
         Gui gui = new Gui();
-        String[] labels = {"Insira o nome", "Insira a data", "Insira a descrição"};
+        String[] labels = {"Insira o nome", "Insira a data (deixe vazio para a data atual)", "Insira a descrição"};
 
         for(int i=0; i<labels.length; i++){
             Object res = gui.input(labels[i]);
             if(res == null) return;
             if(i==0) setNome(""+res);
             if(i==1) {
-                if (!verifyDate(""+res)){
+                String resS = res+"";
+                if(resS.isEmpty()){
+                    String dia = now.getDayOfMonth()+"";
+                    String mes = now.getMonthValue()+"";
+                    String ano = now.getYear()+"";
+
+                    if(Integer.parseInt(dia) < 10) dia = "0"+dia;
+                    if(Integer.parseInt(mes) < 10) mes = "0"+mes; 
+                    res = dia+"/"+mes+"/"+ano;
+                }if (!verifyDate(""+res)){
                     i=0;
                     continue;
                 }
@@ -28,7 +39,8 @@ public class Evento extends Registro {
     }
     public void editar(int index){
         Gui gui = new Gui();
-        String[] labels = {"Insira o nome (pressione enter para não editar)", "Insira a data (pressione enter para não editar)", "Insira a descrição (pressione enter para não editar)"};
+        LocalDateTime now = LocalDateTime.now();
+        String[] labels = {"Insira o nome (pressione enter para não editar)", "Insira a data (deixe vazio para a data atual)", "Insira a descrição (pressione enter para não editar)"};
         Evento eve = armazena.getOneEvento(index);
 
         Object res = gui.input(labels[0], eve.getNome());
@@ -37,7 +49,16 @@ public class Evento extends Registro {
         while(true){
             res = gui.input(labels[1], eve.getData());
             if(res == null) return;
-            if (!verifyDate(""+res)){
+            String resS = res+"";
+            if(resS.isEmpty()){
+                String dia = now.getDayOfMonth()+"";
+                String mes = now.getMonthValue()+"";
+                String ano = now.getYear()+"";
+
+                if(Integer.parseInt(dia) < 10) dia = "0"+dia;
+                if(Integer.parseInt(mes) < 10) mes = "0"+mes; 
+                res = dia+"/"+mes+"/"+ano;
+            }if (!verifyDate(""+res)){
                 continue;
             }
             setData(""+res);
